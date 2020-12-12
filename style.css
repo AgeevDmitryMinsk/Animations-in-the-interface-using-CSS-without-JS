@@ -1,0 +1,225 @@
+/*Теперь напишем кейфреймы для пульсирующей кнопки (такой будет иконка "play" на второй карточке). Назовите этот набор кейфреймов pulse.
+В начальном состоянии значение трансформации «масштабирование» равно 1 (то есть размер иконки сохраняется), а в финале — 1.1 (увеличение на 10%).*/
+@keyframes pulse {
+  from {
+    transform: scale(1); 
+}
+to {
+  transform: scale(1.5); 
+}}
+
+
+/*Ваша задача создать набор кейфреймов с именем countdown (англ. countdown, «обратный отсчёт»), который будет менять 
+  значение свойства  content с 3 в начале анимации на 2 по прошествии 50% её хронометража, и на 1 по истечении 100%.*/
+  @keyframes countdown {
+    0%{content: '3'}
+    50% {content: '2'}
+    100% {content: '1'}
+  }
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.header__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+  margin: auto;
+}
+
+.cards {
+  background-color: #000;
+  color: #fff;
+}
+
+.cards__wrapper {
+  width: 490px;
+  margin: auto;
+  padding: 50px 0;
+}
+
+.title {
+  margin: 0;
+  line-height: 56px;
+  font-size: 54px;
+}
+
+.subtitle {
+  line-height: 19px;
+  font-size: 14px;
+  margin-top: 35px;
+  margin-bottom: 55px;
+  max-width: 350px;
+}
+
+.demo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.demo__item {
+  background-color: #202020;
+  width: 240px;
+  height: 240px;
+  margin-right: 10px;
+  margin-top: 10px;
+  position: relative;
+  border-radius: 4px; /*радиус закругления иконки-карточки*/
+  background-size: cover;
+  /*overflow: hidden; /*Сделайте так, чтобы при увеличении блока скрывалось всё, что не умещается в блок с классом demo__item.
+                      Это очень часто использующийся эффект. Запоминайте!*/
+}
+
+.demo__item:nth-of-type(2n) {
+  margin-right: 0;
+}
+
+.demo__item:first-of-type, .demo__item:nth-of-type(2) {
+  margin-top: 0;
+}
+
+.demo__item-title {
+  width: 158px;
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  margin: 0;
+  line-height: 30px;
+  font-size: 30px;
+  font-weight: normal;
+}
+
+.demo__item-subtitle {
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 24px;
+  margin-left: 16px;
+  width: 158px;
+}
+
+.demo__item-subtitle_character_cousteau {
+  position: absolute;
+  top: 24px;
+  left: 16px;
+  margin: 0;
+  opacity: 0; /*В качестве значения выступает число из диапазона [0.0; 1.0]. Значение 0 соответствует полной прозрачности элемента, а 1, 
+              наоборот — его непрозрачности. Дробные числа вида 0.6 устанавливают полупрозрачность. Допускается писать числа без 
+              нуля впереди, вида opacity: .6. 
+              Этот эффект называется fade-in, а обратный - fade-out. Встречается сплошь и рядом. - cм далее строку 109: opacity: 1 */
+  transition: opacity 1s ease;
+  /*Cделаем так, чтобы при наведении мыши на первую карточку над портретом Кусто проступала надпись «французский
+   исследователь».    Сейчас она спрятана нулевым значением свойства opacity (непрозрачность) в правиле для элемента
+   с классом demo__item-subtitle_character_cousteau. Создайте новое правило с селектором, выбирающим элемент с этим
+   классом, вложенный в блок demo__item, на который наведена мышь. В этом правиле задайте свойство opacity равным 1.
+  А правило для класса demo__item-subtitle_character_cousteau дополните свойством transition: для значения opacity 
+  с хронометражем 0,3 сек и временной функцией «непринуждённо».*/
+  }
+
+.demo__item:hover .demo__item-subtitle_character_cousteau {
+  
+  opacity: 1;
+}
+
+.demo__wrapper {
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+}
+
+.demo__wrapper_character_cousteau {
+  background-image: url(https://pictures.s3.yandex.net/animation_topic/kusto.png);
+  transition: transform 0.9s ease-in-out; 
+  /*Определите элементу с классом demo__wrapper_character_cousteau плавность изменения состояний для 
+    значения transform: длительность 0,9 секунд и функция времени ease-in-out (сначала осторожно, потом отпустить).*/
+  opacity: 1;
+}
+.demo__wrapper_character_cousteau:hover {
+  /*В состоянии «при наведении указателя мыши» добавьте тень блока с нулевым сдвигом, размытием в 20 пикселей, цвета #4E52B0.*/
+  box-shadow: 0 0 30px #4E52B0; 
+}
+
+/*Увеличим фоновое изображение первой карточки, с Жак-Ивом Кусто. Оно задано правилом для класса demo__wrapper_character_cousteau.
+Напишите селектор для элемента с классом demo__wrapper_character_cousteau, когда его родительский элемент demo__item находится в состоянии hover (наведения мыши).
+Задайте в этом новом правиле трансформацию «масштабирование», увеличивающую изображение demo__wrapper_character_cousteau на 5 сотых.
+Селектор не из простых, сначала нужно написать состояние для родителя, а потом назвать вложенный элемент.
+[селектор_родительского_элемента]:hover [селектор_дочернего_элемента] {
+    /* свойства, которые нужно применить к дочернему элементу при наведении мыши на родителя: */
+.demo__item:hover .demo__wrapper_character_cousteau {
+  transform: scale(1.25);
+}
+
+
+
+.demo__item_character_rossie {
+  background-image: url(https://pictures.s3.yandex.net/animation_topic/rossie.png);
+}
+
+.demo__item_character_rossie:hover {
+  /*В состоянии «при наведении указателя мыши» добавьте тень блока с нулевым сдвигом, размытием в 20 пикселей, цвета #4E52B0.*/
+ box-shadow: 0 0 20px #4E52B0;
+}
+
+.demo__item_character_baumgartner {
+  background-image: url(https://pictures.s3.yandex.net/animation_topic/baumgartner.png);
+}
+
+
+
+.demo__item_character_starman {
+  /*Начнём с простого. Оформите элемент demo__item_character_starman:
+  В состоянии «по умолчанию» добавьте свойству box-shadow плавный переход длительностью 0,3 сек.*/
+  background-image: url(https://pictures.s3.yandex.net/animation_topic/starman.png);
+  transition: box-shadow .3s ease ;
+}
+
+.demo__item_character_starman:hover {
+  /*В состоянии «при наведении указателя мыши» добавьте тень блока с нулевым сдвигом, размытием в 20 пикселей, цвета #4E52B0.*/
+ box-shadow: 0 0 20px #4E52B0;
+}
+
+.demo__item-ico {
+  position: absolute;
+  top: 24px;
+  right: 16px;
+  width: 50px;
+  animation: pulse 1s ease-in-out infinite alternate;}
+/*Примените анимацию pulse из @keyframesк элементу с классом demo__item-ico.
+  Хронометраж анимации должен составлять одну секунду;
+  временная функция ease-in-out («сначала осторожно, потом отпустить»); повторять бесконечно;
+  движение попеременно из стороны в сторону.*/
+
+
+
+.demo__item-subtitle_character_baumgartner::after {
+  content: '3';
+  position: absolute;
+  top: 35px;
+  right: 15px;
+  font-size: 72px;
+}
+
+/*Теперь запустим анимацию с обратным отсчётом. Создайте правило с селектором элемента с
+ классом demo__item-subtitle_character_baumgartner, вложенного в блок с классом demo__item,
+ на который наведена мышь. Пропишите свойством этого правила анимацию countdown:
+  длительностью две секунды,
+  по времени линейно,
+  выполненную один раз,
+  с сохранением финального состояния.*/
+.demo__item:hover  .demo__item-subtitle_character_baumgartner::after {
+  animation: countdown 2s linear 1 forwards; 
+}
+
+
+.demo__item_character_baumgartner:hover { 
+  /*В состоянии «при наведении указателя мыши» добавьте тень блока с нулевым сдвигом, размытием в 20 пикселей, цвета #4E52B0.*/
+  box-shadow: 0 0 20px #4E52B0; 
+}
