@@ -154,7 +154,7 @@ html, body {
 [селектор_родительского_элемента]:hover [селектор_дочернего_элемента] {
     /* свойства, которые нужно применить к дочернему элементу при наведении мыши на родителя: */
 .demo__item:hover .demo__wrapper_character_cousteau {
-  transform: scale(1.25);
+  transform: scale(1.1);
 }
 
 
